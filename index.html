@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <!-- <link rel="stylesheet" href="../main.css"> -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            font: 16px system-ui, sans-serif;
+        }
+        body {
+            min-height: 100vh;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+        }
+        a {
+            text-decoration: none;
+            color: rgb(33, 70, 70);
+        }
+        i {font-style: normal;}
+        .btn {cursor: pointer;}
+        header {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            position: sticky;
+            top: 0;
+            background-color: #fff;
+        }
+        header > div#logo,
+        header > div#tools {
+            margin: 0 50px;
+        }
+        header > div#logo img {
+            width: 70px;
+        }
+        header > div#logo > a {
+            position: relative;
+        }
+        header > div#logo > a::before,
+        header > div#logo > a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+        }
+        header > div#logo > a::before {
+            top: -20px;
+            border: 20px solid;
+            border-color: blueviolet transparent transparent blueviolet;
+        }
+        header > div#logo > a::after {
+            top: 0px;
+            border: 17px solid;
+            border-color: orange transparent transparent orange;
+            /* opacity: .5; */
+            z-index: -1;
+        }
+        header > div#menu {
+            background-color: #fff;
+            margin-right: auto;
+            position: relative;
+        }
+        ul#nav {
+            display: inline-flex;
+            list-style-type: none;
+        }
+        li {
+            position: relative;
+        }
+        ul#nav > li > a {
+            display: block;
+            padding: 15px 30px;
+            font-weight: 500;
+            position: relative;
+        }
+        ul#nav > li > a + i {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0%;
+            height: 2px;
+            background-color: rgb(33, 70, 70);
+            transition: width 250ms ease 50ms;
+        }
+        ul#nav > li > a:hover + i,
+        ul#nav > li > a.active + i {
+            width: 30%;
+        }
+        span.sign__up {
+            border: 1px solid rgb(33,70,70);
+            padding: 0.5rem 16px;
+            border-radius: 5px;
+            color: rgb(33,70,70);;
+            font-weight: 500;
+            transition: background-color 200ms ease 30ms, color 200ms ease 30ms;
+        }
+        span.sign__up:hover {
+            background-color: rgb(33,70,70);
+            color: #fff;
+        }
+        main {
+            margin: 60px auto 0;
+            max-width: 1000px;
+            width: 100%;
+        }
+        main > iframe {
+            border: 0;
+            width: 100%;
+            height: 100%;
+        }
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-button {
+            height: 5px;
+            width: 5px;
+            background-color: #555;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #555;
+        }
+        dialog {
+            margin: auto;
+            border: 0;
+            min-width: 400px;
+            aspect-ratio: 2/3;
+            outline: none;
+        }
+        dialog#dg_reg {
+            padding: 0 30px;
+            border-radius: 10px 10px 0 0;
+        }
+        dialog#dg_chk {
+            text-align: center;
+            padding: 30px;
+            min-width: 0;
+            aspect-ratio: 0;
+        }
+        form#fm_reg > h3 {
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 30px 0;
+            border-bottom: 1px solid #ccc;
+        }
+        form#fm_reg > h3::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 5px;
+            width: 0;
+            background-color: rgb(33,70,70);
+            animation-duration: 1s;
+            animation-timing-function: ease-in-out;
+            animation-fill-mode: forwards;
+            animation-iteration-count: infinite;
+        }
+        form#fm_reg > h3.loading::before {
+            animation-name: loader;
+        }
+        @keyframes loader {
+            from {
+                width: 0%;
+                transform: translateX(0%);
+            }
+            to { 
+                width: 50%;
+                transform: translateX(100%);
+            }
+        }
+        span.times {
+            display: inline-flex;
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            background-color: #eee;
+            line-height: 1;
+            position: relative;
+            cursor: pointer;
+        }
+        span.times > i {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        form#fm_reg > div:first-of-type {
+            margin: 20px 0 40px;
+        }
+        form#fm_reg label {
+            margin: 7px;
+        }
+        form#fm_reg label:not(label.type),
+        form#fm_reg input:not(input[type='radio']) {
+            display: block;
+            width: 100%;
+        }
+        form#fm_reg input:not(input[type='radio'],input[type='submit']) {
+            padding: 14px 18px;
+            margin-bottom: 30px;
+            border: 1px solid #aaa;
+        }
+        input[type="submit"] {
+            margin: 30px 0;
+            padding: 14px 18px;
+            border: 1px solid rgb(33,70,70);
+            background-color: rgb(33,70,70);
+            color: #fff;
+            outline: none;
+            cursor: pointer;
+            transition: background-color 150ms ease 40ms, color 150ms ease 40ms;
+        }
+        input[type='submit']:hover {
+            background-color: rgb(33,70,70);
+            color: #fff;
+        }
+        form#fm_reg input[type='radio'] {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #aaa;
+            vertical-align: text-bottom;
+            cursor: pointer;
+        }
+        /* form#fm_reg input#website {
+            width: 0;
+            transform: translateX(20px);
+            transition: transform 100ms ease-in;
+        }
+        form#fm_reg input#website {
+            width: 100%;
+            transform: translateX(-20px);
+        } */
+        form#fm_reg label.type {
+            line-height: 3;
+            cursor: pointer;
+        }
+        sup.star {
+            color: #f00;
+        }
+        span.cls {
+            padding: 10px 16px;
+            background-color: rgb(33,70,70);
+            color: #fff;
+        }
+        @media screen and (max-width: 667px) {
+            dialog {
+                min-width: 100%;
+            }
+            header {
+                margin: 20px 0;
+            }
+            header > div#logo {
+                order: 1;
+                -ms-flex-order: 1;
+            }
+            header > div#logo img {
+                width: 50px;
+            }
+            header > div#menu {
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                box-shadow: 2px 2px 12px 2px #ddd;
+                overflow: scroll;
+                --fade-start: 85%;
+	            mask-image: linear-gradient(to right, white var(--fade-start), transparent);
+            }
+            header > div#menu::-webkit-scrollbar {
+                display: none;
+            }
+            header > div#tools {
+                order: 2;
+                -ms-flex-order: 2;
+            }
+            header > div#menu,
+            header > div#tools {
+                margin: 0 auto;
+            }
+            span.menu {
+                display: block;
+                width: 50px;
+                aspect-ratio: 1;
+                margin: 10px;
+                border-radius: 50%;
+                position: relative;
+                transition: background-color 150ms ease;
+            }
+            span.menu > i {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) scale(1.5) rotate(90deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="logo">
+            <a href="./index.html" title="Flutterspace"><!--img src="../res/bokeh.png" alt="logo"/--></a>
+        </div>
+        <div id="menu">
+            <ul id="nav">
+                <li><a href="#" data-href="/user/htm/products.html">PRODUCT</a><i></i></li>
+                <li><a href="#" data-href="/user/htm/pricing.html">PRICING</a><i></i></li>
+                <li><a href="#" data-href="/user/htm/contact.html">CONTACT</a><i></i></li>
+                <!-- <li><a href="#" data-href="/user/htm/404.html">GALLERY</a><i></i></li> -->
+                <li><a href="#" data-href="/user/htm/404.html">ABOUT</a><i></i></li>
+            </ul>
+        </div>
+        <div id="tools">
+            <span class="btn sign__up">Register</span>
+        </div>
+    </header>
+    <main>
+        <iframe src="/user/htm/home.html"></iframe>
+    </main>
+    <footer></footer>
+    <dialog id="dg_reg">
+        <form name="register" id="fm_reg">
+            <h3><span>Register Your School</span><span class="times close"><i>&times;</i></span></h3>
+            <div>Field labels marked with <sup class="star"><i>&Star;</i></sup> are required.</div>
+            <label for="sn"><sup class="star"><i>&Star;</i></sup>School Name</label>
+            <input type="text" name="name" id="nos" placeholder="Enter name of school" required/>
+            <label for="sa"><sup class="star"><i>&Star;</i></sup>School Address</label>
+            <input type="text" name="addr" id="sa" placeholder="Enter address of school" required/>
+            <label for="sh"><sup class="star"><i>&Star;</i></sup>Head of School/Proprietor/Proprietress</label>
+            <input type="text" name="prop" id="sh" placeholder="Enter school head" required/>
+            <label for="ph"><sup class="star"><i>&Star;</i></sup>Phone Number</label>
+            <input type="number" name="phone" id="ph" placeholder="Enter school phone number" required/>
+            <label for="chapter">School Branch <small>(optional)</small></label>
+            <input type="text" name="branch" id="chapter" placeholder="Enter branch"/>
+            <input type="radio" name="type" id="nur_pri_sch" value="primary" required/>
+            <label for="nur_pri_sch" class="type">Nursery/Primary School</label><br>
+            <input type="radio" name="type" id="sec_sch" value="primary" required/>
+            <label for="sec_sch" class="type">Secondary School</label>
+            <input type="submit" value="Register">
+        </form>
+    </dialog>
+    <dialog id="dg_chk">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" width="70px" height="70px" viewBox="0 0 32 32" version="1.1">
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-100.000000, -1139.000000)" fill="#009578">
+                    <path d="M122.027,1148.07 C121.548,1147.79 120.937,1147.96 120.661,1148.43 L114.266,1159.51 L110.688,1156.21 C110.31,1155.81 109.677,1155.79 109.274,1156.17 C108.871,1156.54 108.85,1157.18 109.228,1157.58 L113.8,1161.8 C114.177,1162.2 114.81,1162.22 115.213,1161.84 C115.335,1161.73 122.393,1149.43 122.393,1149.43 C122.669,1148.96 122.505,1148.34 122.027,1148.07 L122.027,1148.07 Z M116,1169 C108.268,1169 102,1162.73 102,1155 C102,1147.27 108.268,1141 116,1141 C123.732,1141 130,1147.27 130,1155 C130,1162.73 123.732,1169 116,1169 L116,1169 Z M116,1139 C107.164,1139 100,1146.16 100,1155 C100,1163.84 107.164,1171 116,1171 C124.836,1171 132,1163.84 132,1155 C132,1146.16 124.836,1139 116,1139 L116,1139 Z" id="checkmark-circle" sketch:type="MSShapeGroup"></path>
+                </g>
+            </g>
+        </svg>
+        <p>Thank you for choosing Flutterspace. <br>We'll send you a feedback within 48 hours.</p>
+        <span class="btn cls close">Close</span>
+    </dialog>
+    <script>
+        const iframe = document.querySelector('iframe');
+        const links = document.querySelectorAll('ul#nav li a');
+        //preset iframe's src
+        //iframe.src = links.item(0).dataset.href;
+        // iframe.addEventListener('load', () => console.log('loading'));
+        links.forEach(lnk => {
+            lnk.addEventListener('click', () => {
+                for (i=0;i<links.length;i++) links[i].classList.remove('active');
+                lnk.classList.add('active');
+                iframe.src = lnk.dataset.href
+            });
+        });
+        const dialogRegister = document.querySelector('dialog#dg_reg');
+        const signUpBtn = document.querySelector('span.sign__up');
+        signUpBtn.addEventListener('click', () => dialogRegister.showModal())
+        //panacea for closing all <dialog>
+        const times = document.querySelectorAll('span.close');
+        times.forEach(tm => {
+            tm.addEventListener('click', () => tm.closest('dialog').close());
+        });
+    </script>
+    <script type="module">
+        
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyCnGk02gQeUZ9nJeOBxHMk3jlC2_pG_jZo",
+          authDomain: "flutterspace-d2385.firebaseapp.com",
+          projectId: "flutterspace-d2385",
+          storageBucket: "flutterspace-d2385.appspot.com",
+          messagingSenderId: "979544012314",
+          appId: "1:979544012314:web:c2eef86fccbae61f17c3a3",
+          measurementId: "G-5E3NVV96HY"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // const snapshot = await getDoc(doc(db, 'clientele', 'oKHUHzl13FG6wmHwT6bz')).then(res => console.log(res.data()));
+        const formRegister = document.querySelector('form#fm_reg');
+        formRegister.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            document.querySelector('form#fm_reg > h3').classList.add('loading');
+            e.submitter.disabled = true;
+            e.submitter.style.cursor = 'not-allowed';
+
+            const formdata = new FormData(formRegister);
+            let obj = {};
+            for (const [k, v] of formdata.entries()) {
+                obj[k] = v;
+            }
+            obj.createdAt = Timestamp.fromDate(new Date());
+            const docRef = await addDoc(collection(db, "clientele"), obj);
+            console.log("Document added with ID: ", docRef.id);
+
+            document.querySelector('dialog#dg_reg').close();
+            document.querySelector('dialog#dg_chk').showModal();
+            document.querySelector('form#fm_reg > h3').classList.remove('loading');
+            e.submitter.disabled = false;
+            e.submitter.style.cursor = 'pointer';
+        })
+      </script>
+</body>
+</html>
