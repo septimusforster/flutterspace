@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- <link rel="stylesheet" href="../main.css"> -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            font: 16px sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* border: 1px solid yellow; */
+            width: 100%;
+            height: 100vh;
+        }
+        div.container {
+            width: 36%;
+            /* min-width: 500px; */
+            /* border: 1px solid red; */
+        }
+        details {
+            transition: background-color 250ms ease-in-out 250ms;
+        }
+        details[open] {
+            background-color: #2e2e2e;
+        }
+        details > * {
+            padding: 20px;
+            margin: 10px;
+            
+        }
+        /* details:nth-of-type(odd) {
+            background-color: #2e2e2e;
+        } */
+        /* details:nth-of-type(even) {
+            box-shadow: 0 0 3px 1px #222;
+        } */
+        details > div {
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        details > div span {
+            height: 100px;
+            width: 100px;
+            border: 1px solid #555;
+            border-radius: 10px;
+            color: #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 150ms ease-in;
+        }
+        details > div span:hover {
+            background-color: #6a5acd;
+        }
+        details > div span p {
+            text-align: center;
+            padding: 3px;
+        }
+        summary {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border-radius: 10px;
+            color: #ccc;
+            /* margin-bottom: 20px; */
+            cursor: pointer;
+            position: relative;
+            transition: background-color 150ms ease-in;
+        }
+        summary:hover {
+            background-color: #2e2e2e;
+        }
+        summary > div {
+            font-weight: 600;
+        }
+        details > summary > svg {
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%) rotate(0deg);
+            left: 500px;
+            transition: transform 200ms ease-in-out;
+        }
+        details[open] > summary > svg {
+            transform: rotate(90deg);
+        }
+        @media screen and (max-width: 667px) {
+            div.container {
+                width: 100vw;
+                height: 100vh;
+                padding: calc(40px + 20px) 0 20px;
+            }
+            details > summary > svg {
+                transform: translateY(-50%) rotate(90deg);
+                left: 85vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <details>
+            <!-- <div class="left__right__arrow" style="display: block;">
+            </div> -->
+            <summary>
+                <div>CRITICAL SETTINGS</div>
+                
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" viewBox="0 0 24 24">
+                    <g data-name="Layer 2">
+                        <g data-name="arrow-ios-forward">
+                            <rect width="24" height="24" transform="rotate(-90 12 12)" opacity="0"/>
+                            <path d="M10 19a1 1 0 0 1-.64-.23 1 1 0 0 1-.13-1.41L13.71 12 9.39 6.63a1 1 0 0 1 .15-1.41 1 1 0 0 1 1.46.15l4.83 6a1 1 0 0 1 0 1.27l-5 6A1 1 0 0 1 10 19z"/>
+                        </g>
+                    </g>
+                </svg>
+            </summary>
+            <div>
+                <span><p>Manage arms</p></span>
+                <span><p>Change of subject</p></span>
+                <span><p>Manage master of form</p></span>
+            </div>
+        </details>
+        <details>
+            <summary>
+                <div>CRITICAL SETTINGS</div>
+                <p>This description is for "Critical Settings". This is a longer text than before.</p>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" viewBox="0 0 24 24">
+                    <g data-name="Layer 2">
+                        <g data-name="arrow-ios-forward">
+                            <rect width="24" height="24" transform="rotate(-90 12 12)" opacity="0"/>
+                            <path d="M10 19a1 1 0 0 1-.64-.23 1 1 0 0 1-.13-1.41L13.71 12 9.39 6.63a1 1 0 0 1 .15-1.41 1 1 0 0 1 1.46.15l4.83 6a1 1 0 0 1 0 1.27l-5 6A1 1 0 0 1 10 19z"/>
+                        </g>
+                    </g>
+                </svg>
+            </summary>
+            <div>
+                <span></span><span></span><span></span>
+            </div>
+        </details>
+        <details>
+            <summary>
+                <div>CRITICAL SETTINGS</div>
+                <p>This description is for "Critical Settings".</p>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" viewBox="0 0 24 24">
+                    <g data-name="Layer 2">
+                        <g data-name="arrow-ios-forward">
+                            <rect width="24" height="24" transform="rotate(-90 12 12)" opacity="0"/>
+                            <path d="M10 19a1 1 0 0 1-.64-.23 1 1 0 0 1-.13-1.41L13.71 12 9.39 6.63a1 1 0 0 1 .15-1.41 1 1 0 0 1 1.46.15l4.83 6a1 1 0 0 1 0 1.27l-5 6A1 1 0 0 1 10 19z"/>
+                        </g>
+                    </g>
+                </svg>
+            </summary>
+            <div>
+                <span></span><span></span><span></span>
+            </div>
+        </details>
+        
+    </div>
+</body>
+</html>

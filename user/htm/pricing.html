@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 3</title>
+    <!-- <link rel="stylesheet" href="../main.css"> -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            font: 16px system-ui, sans-serif;
+            color: #555;
+            /* height: 100vh; */
+        }
+        a {
+            text-decoration: none;
+        }
+        i {
+            font-style: normal;
+        }
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-button {
+            height: 5px;
+            width: 5px;
+            background-color: #555;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #555;
+        }
+        ul, ol {
+            margin-inline-start: 2em;
+        }
+        header {
+            background-color: #fff;
+            position: sticky;
+            top: 0;
+        }
+        header > ul {
+            list-style-type: none;
+            margin-inline-start: 20px;
+        }
+        header > ul > li {
+            padding: 5px 10px;
+            color: #777;
+            display: inline-block;
+        }
+        header > ul > li > a {
+            color: #777;
+        }
+        header > ul > li > a:hover {
+            color: #222;
+        }
+        i.gt {
+            height: 8px;
+            width: 8px;
+            display: inline-flex;
+            border: 2px solid;
+            border-color: #999 #999 transparent transparent;
+            transform: rotate(45deg);
+        }
+        main {
+            padding: 25px;
+        }
+        main > * {
+            margin: 0 auto 20px;
+        }
+        div.note {
+            line-height: 1;
+            display: flex;
+            align-items: center;
+        }
+        span.star {
+            margin: 0 20px;
+            display: flex;
+            height: 20px;
+            width: 20px;
+            background: #f3f3f3;
+            padding: 20px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+        }
+        span.imp {/*important*/
+            padding: 2px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            color: #777;
+            background-color: #eee;
+            font-size: 12px;
+            vertical-align: middle;
+            font-weight: 500;
+        }
+        span.rdir {
+            font-weight: 500;
+            cursor: pointer;
+        }
+        span.rdir:hover {
+            text-decoration: underline;
+        }
+        div p, div > ul,
+        section p, section > ul, ol {
+            padding: 10px 0;
+            line-height: 2;
+        }
+        div p, section p {
+            text-align: justify;
+        }
+        footer {
+            padding: 20px;
+            color: #555;
+            text-align: center;
+            background-color: #f6f6f6;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <ul>
+            <li><a href="#">Home</a></li><i class="gt"></i>
+            <li>Pricing</li>
+        </ul>
+    </header>
+    <main>
+        <section>
+            <p>
+                With Flutterspace, your school's data is guaranteed a safe and secure storage space in an online database. It is 
+                true&horbar;Flutterspace requires internet connectivity to manage and operate, and owing to its lightweight database, 
+                storing and retrieving school data is speedy and unhampered by internet bottlenecks such as a slow network. What's more, 
+                Flutterspace can <em>persist data</em>, which means that data are preservable offline in the case of internet disconnection,
+                and at such a time as when the internet connection is re-established, Flutterspace automatically resumes the intended database operation.
+            </p>
+            <h4>Features</h4>
+            <ul>
+                <li>It has an online presence, thus manipulation of school data can be performed from anywhere.</li>
+                <li>No installation is required; a registered school simply has to login with valid credentials to use.</li>
+                <li>Highly scalable: as the school's data grows, the system automatically expands to contain it.</li>
+                <li>Flutterspace users can upload student passport photographs that will appear on their report cards.</li>
+                <li>Report cards are downloadable in PDF format.</li>
+                <li>The school's data is highly secured against loss or damage through multiple backup mechanisms.</li>
+                <li>It has a Computer-Based Test (CBT) for secondary schools (an optional feature).</li>
+            </ul>
+            <h4>Pricing</h4>
+            <p>&Star; Each pricing article is for a termly basis. &Star;</p>
+            <ul>
+                <li>Student population between 50 and 100&horbar;One thousand naira (N1000) per student.</li>
+                <li>Student population above 100&horbar;Seven hundred naira (N700) per student.</li>
+                <li>For the Computer-Based Test's pricing, please kindly <span class="rdir" onclick="redirect(2)">contact us</span> for terms and conditions.</li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        Flutterspace &copy; 2024
+    </footer>
+    <script>
+        const iframeParent = parent.window;
+        function redirect(navPageNum) {
+            iframeParent.document.querySelectorAll('ul#nav li a').item(navPageNum).click();
+        }
+    </script>
+</body>
+</html>

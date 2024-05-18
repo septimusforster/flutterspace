@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 3</title>
+    <!-- <link rel="stylesheet" href="../main.css"> -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            font: 16px system-ui, sans-serif;
+            color: #555;
+            /* height: 100vh; */
+        }
+        a {
+            text-decoration: none;
+        }
+        i {
+            font-style: normal;
+        }
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-button {
+            height: 5px;
+            width: 5px;
+            background-color: #555;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #555;
+        }
+        ul {
+            margin-inline-start: 2em;
+            padding: 10px 0;
+        }
+        header {
+            background-color: #fff;
+            position: sticky;
+            top: 0;
+        }
+        header > ul {
+            list-style-type: none;
+            margin-inline-start: 20px;
+        }
+        header > ul > li {
+            padding: 5px 10px;
+            color: #777;
+            display: inline-block;
+        }
+        header > ul > li > a {
+            color: #777;
+        }
+        header > ul > li > a:hover {
+            color: #222;
+        }
+        i.gt {
+            height: 8px;
+            width: 8px;
+            display: inline-flex;
+            border: 2px solid;
+            border-color: #999 #999 transparent transparent;
+            transform: rotate(45deg);
+        }
+        main {
+            padding: 25px;
+        }
+        main > * {
+            margin: 0 auto 20px;
+        }
+        div.note {
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+        span.star {
+            margin: 0 20px;
+            display: flex;
+            height: 20px;
+            width: 20px;
+            background: #f3f3f3;
+            padding: 20px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+        }
+        div p, div > ul,
+        section p, section > ul {
+            padding: 10px 0;
+            line-height: 2;
+        }
+        div p, section p {
+            text-align: justify;
+        }
+        span.imp {/*important*/
+            padding: 2px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            color: #777;
+            background-color: #eee;
+            font-size: 12px;
+            vertical-align: middle;
+            font-weight: 500;
+        }
+        span.rdir {
+            font-weight: 500;
+            cursor: pointer;
+        }
+        span.rdir:hover {
+            text-decoration: underline;
+        }
+        footer {
+            padding: 20px;
+            color: #555;
+            text-align: center;
+            background-color: #f6f6f6;
+        }
+        div.gallery {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 50px;
+        }
+        figure {
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            transition: box-shadow 100ms ease 20ms;
+        }
+        figure:hover {
+            box-shadow: 0 0 0 5px #ccc;
+        }
+        figure > img {
+            width: 250px;
+            aspect-ratio: 1;
+        }
+        figcaption {
+            padding: 5px;
+        }
+        ::backdrop {
+            background-color: rgba(0,0,0,.7);
+        }
+        dialog {
+            outline: none;
+            height: 700px;
+            aspect-ratio: 1;
+            margin: auto;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            position: fixed;
+            text-align: center;
+        }
+        span.times {
+            position: fixed;
+            right: 30px;
+            height: 30px;
+            width: 30px;
+            background-color: #fff;
+            line-height: 1;
+            transform: scale(2.5);
+            border-radius: 50%;
+            display: flex;
+            cursor: pointer;
+            box-shadow: 0 0 1px #777;
+            align-items: center;
+            justify-content: center;
+            top: 30px;
+        }
+        /* @media screen and (max-width: 667px) {
+            div.gallery {
+                flex-wrap: wrap;
+            }
+        } */
+    </style>
+</head>
+<body>
+    <header>
+        <ul>
+            <li><a href="#">Home</a></li><i class="gt"></i>
+            <li>Products</li>
+        </ul>
+    </header>
+    <main>
+        <section>
+            <h2>Flutterspace</h2>
+            <p>
+                Flutterspace is an online web application that is dedicated to storing and manipulating data representing both primary and secondary 
+                school records on a robustly-built database system. Indeed, the fact that Flutterspace is an internet solution implies that, entry of scoresheets 
+                or registers, for instance, can be performed with the convenience of doing so from a remote location. And of 
+                course, report sheets can be viewed, downloaded and/or printed online, as per user choice. Moreover, Flutterspace is reliant on 
+                a highly dependable database system, with staunch yet lightweight routines for securing and backing up your school's data, to prevent 
+                any form of data loss, though such occurence is very infrequent and unlikely.
+            </p>
+            <p>See the <span class="rdir" onclick="redirect(1)">Pricing page</span> for more information and pricing for this product.</p>
+            <p>
+                The following images include screeshots of Flutterspace web application for storing, processing and retrieving
+                school records.
+            </p>
+            <div class="gallery">
+                <figure>
+                    <img src="../res/admin-register.JPG"/>
+                    <figcaption>Admin register</figcaption>
+                </figure>
+                <!-- <figure>
+                    <img src="../res/register.JPG"/>
+                    <figcaption>Class register</figcaption>
+                </figure> -->
+                <figure>
+                    <img src="../res/scores2.JPG"/>
+                    <figcaption>Score sheet</figcaption>
+                </figure>
+                <figure>
+                    <img src="../res/nursery-result.JPG"/>
+                    <figcaption>Nursery result</figcaption>
+                </figure>
+                <figure>
+                    <img src="../res/primary-result.JPG"/>
+                    <figcaption>Primary result</figcaption>
+                </figure>
+            </div>
+            <h4>Computer-Based Test&nbsp;&nbsp;&starf;</h4>
+            <p>In addition, Flutterspace has a Computer-Based Test (CBT) application (an optional feature) 
+                expectedly for use by secondary schools. It possesses an interface for uploading image formats of tests, loading the test in advance 
+                with a preset date, and requires a validation code to access each test. On completion of a test within its duration, or failing that, 
+                the system promptly locks and submits the test and, in mere moments, displays the student's score, which has already been banked in 
+                the database.
+            </p>
+            <p>See the <span class="rdir" onclick="redirect(1)">Pricing page</span> for more information and pricing for this product.</p>
+            <p>
+                The following images include screeshots of Flutterspace web application for Computer-Based Test.
+            </p>
+            <div class="gallery">
+                <figure>
+                    <img src="../res/cbt-exercise.JPG"/>
+                    <figcaption>CBT exercise uploader</figcaption>
+                </figure>
+                <figure>
+                    <img src="../res/cbt1.JPG"/>
+                    <figcaption>CBT partial GUI</figcaption>
+                </figure>
+                <figure>
+                    <img src="../res/cbt-exam.JPG"/>
+                    <figcaption>CBT GUI</figcaption>
+                </figure>
+            </div>
+            <div class="note">
+                <span>Be sure to look at the <span class="rdir" onclick="redirect(1)">pricing</span> for each product.</span>
+            </div>
+            <p>
+                Well, if you so choose to use Flutterspace, then please click the Register button at the top-right corner of your screen to register your school 
+                and decide which one of these school report systems you prefer.<br>
+                <em>NB:</em> Your registration will be confirmed within 48 hours; if otherwise, please contact us through our information on the 
+                <span class="rdir" onclick="redirect(2)">Contact page</span>.
+            </p>
+        </section>
+    </main>
+    <footer>
+        Flutterspace &copy; 2024
+    </footer>
+    <dialog class="dg-img">
+        <span class="times"><i>&times;</i></span>
+        <img src alt="preview"/>
+    </dialog>
+    <script>
+        const iframeParent = parent.window;
+        function redirect(navPageNum) {
+            iframeParent.document.querySelectorAll('ul#nav li a').item(navPageNum).click();
+        }
+        const dgImage = document.querySelector('dialog.dg-img')
+        const figure = document.querySelectorAll('figure');
+        figure.forEach(fig => {
+            fig.addEventListener('click', () => {
+                // dgImage.style.backgroundImage = `url('${fig.querySelector('img').src}')`;
+                dgImage.querySelector('img').src = fig.querySelector('img').src;
+                dgImage.showModal();
+            });
+        });
+
+        const times = document.querySelector('span.times');
+        times.addEventListener('click', () => {
+            dgImage.close();
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+* {margin: 0;padding: 0;box-sizing: border-box;}
+body, button {
+    font: 200 16px "Candara";
+}
+button {
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+a {
+    text-decoration: none;
+    color: #f3f3f3;
+}
+div.container {
+    margin: auto 30dvw;
+}
+section.main__section {
+    margin: 50px 10px;
+    /* display: grid; */
+}
+section.main__section > * {
+    padding: 20px;
+}
+div.section__content {
+    /* border: 1px solid #ccc; */
+    border-radius: 5px;
+    /* box-shadow: 0 3px 5px #ccc; */
+    display: grid;
+    grid-template-columns: repeat(3, minmax(200px, auto));
+    gap: 3rem;
+}
+div.section__content > button {
+    background-color: transparent;
+    font-size: 1.2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: font-weight 250ms ease-out;
+}
+div.section__content > button > span:first-child {
+    font-size: 70px;
+}
+div.hidden {
+    display: none;
+}
+@media screen and (max-width: 667px) {
+    body, button > span {
+        font-size: .8rem;
+    }
+    div.container {
+        margin: 0;
+    }
+    div.section__content {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    body, button > span {
+        font-size: .8rem;
+    }
+    div.container {
+        margin: auto 15dvw;
+    }
+    div.section__content {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+}
+i {
+    font-size: 2.5rem;
+    font-style: normal;
+    color: lightseagreen;
+    position: relative;
+}
+i::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* transform: translateX(50%); */
+    /* background-color: #fff; */
+    width: 100%;
+    height: 100%;
+    transition: width 500ms ease;
+}
+/* i.animate::before */
+i.animate {
+    animation-name: several;
+    animation-duration: 1000ms;
+    animation-timing-function: ease;
+    animation-delay: 500ms;
+    animation-iteration-count: 5;
+}
+@keyframes several {
+    100% {
+        /* width: 0; */
+        transform: scale(1.2);
+    }
+}

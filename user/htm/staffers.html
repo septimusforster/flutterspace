@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            font: 16px Arial;
+            color: #fff;
+        }
+        button {
+            border: none;
+            outline: none;
+            cursor: pointer;
+            background: transparent;
+        }
+        a {
+            text-decoration: none;
+            color: #444;
+        }
+        div.container {
+            margin: auto;
+            max-width: 45%;
+            min-width: 550px;
+        }
+        ::backdrop {
+            background-color: rgba(0,0,0,.5);
+        }
+        dialog {
+            margin: 100px auto;
+            padding: 20px;
+            border: none;
+            outline: none;
+            /* border-radius: 10px; */
+        }
+        /* ul {
+            list-style-type: none;
+        } */
+        table {
+            border-collapse: collapse;
+            border: 1px solid #444;
+            width: 100%;
+        }
+        /* hr {
+            width: 75%;
+            margin: 0 auto;
+            border-width: 2px 0 0 0;
+            border-style: solid;
+            border-color: white; /*rgba(255,255,255,.2);/
+        } */
+        th,
+        tr {
+            border-bottom: 1px solid rgba(255,255,255,.2);
+        }
+        tbody tr {
+            cursor: pointer;
+        }
+        tbody tr:hover {
+            background-color: #7777ff;
+        }
+        tbody tr.hovered {
+            background-color: #6a5acd;
+            bottom: 45px;
+            top: 255.5px;
+        }
+        th {
+            padding: 16px 24px;
+        }
+        td {
+            padding: 12px 24px;
+        }
+        td, th {
+            vertical-align: top;
+        }
+        th:nth-child(2) {
+            text-align: left;
+        }
+        td.hovered > ul {
+            height: auto;
+        }
+        td ul {
+            height: 0;
+            overflow: hidden;
+            transition: height 250ms ease-in-out;
+        }
+        td ul li {
+            margin: 15px;
+        }
+        thead,
+        tfoot {
+            background-color: #444;
+            z-index: 10;
+        }
+        h3, div.action__div, thead, tfoot, tbody tr.hovered {
+            position: sticky;
+        }
+        h3 {
+            vertical-align: bottom;
+            padding: 100px 20px 20px;
+            font-weight: 300;
+            text-align: center;
+            background: #444;
+            top: 0;
+            z-index: 2;
+        }
+        thead {
+            top: 206px;
+        }
+        tfoot {
+            bottom: 0;
+            text-align: center;
+        }
+        button.action__menu {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 10px 10px auto;
+            width: 40px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        button.action__menu i {
+            font-style: normal;
+            transform: rotate(90deg) scale(1.5);
+            line-height: 1;
+        }
+        div.action__div {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 12px 24px;
+            top: 142px;
+            z-index: 10;
+            background-color: dimgray;
+        }
+        span.tlbar,
+        span.times,
+        span.plus,
+        span.minus {
+            height: 40px;
+            width: 40px;
+            align-items: center;
+            border-radius: 40px;
+            cursor: pointer;
+            display: flex;
+            /* text-wrap: nowrap; */
+            /* overflow: hidden; */
+            gap: 2px;
+            /* padding-right: 10px; */
+            transition: width 350ms ease 250ms, background-color 200ms ease;
+            position: relative;
+        }
+        span.tlbar {
+            background-color: gray;
+        }
+        span.tlbar:hover {
+            background-color: #6a5acd;
+        }
+        span.times:hover,
+        span.plus:hover,
+        span.minus:hover {
+            background-color: #f3f3f3;
+        }
+        span.tlbar:first-of-type,
+        span.plus {
+            margin-right: auto;
+        }
+        span.tlbar:hover::before {
+            /* width: 150px; */
+            content: attr(data-content);
+            width: max-content;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: -40px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background-color: #222;
+        }
+        span.tlbar > g,
+        span.times > g,
+        span.plus > g,
+        span.minus > g {
+            font-size: 2rem;
+            padding: 0 10px;
+            text-align: center;
+        }
+        span.minus {
+            background-color: #f7f7f7;
+        }
+        .fm__grp {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            font-size: 1.3rem;
+        }
+        .fm__grp.hdr {
+            margin-bottom: 30px;
+            border-bottom: 1px solid lightgray;
+            padding-bottom: 10px;
+        }
+        .fm__grp.ftr {
+            margin-top: 40px;
+        }
+        .fm__grp input, .fm__grp select {
+            /* display: block; */
+            padding: 10px 16px;
+            height: 40px;
+            margin: 10px 0;
+            border: 1px solid #aaa;
+        }
+        @media screen and (max-width: 667px) {
+            div.container {
+                /* margin: auto; */
+                min-width: 100%;
+            }
+            div.container > h3 {
+                border-bottom: 1px solid #aaa;
+            }
+            button.action__menu {
+                position: fixed;
+                right: 0;
+                margin: 5px 10px 5px auto;
+                display: flex;
+                z-index: 1;
+            }
+            button.action__menu.show + div {
+                display: block;
+            }
+            div.action__div {
+                display: none;
+                padding: 5px 0;
+                background: dimgray;
+                position: fixed;
+                right: 10px;
+                border-radius: 10px;
+                overflow: hidden;
+                z-index: 1;
+                margin-top: 40px;
+            }
+            span.tlbar {
+                height: initial;
+                width: 100%;
+                border-radius: 0;
+                background-color: transparent;
+                text-wrap: nowrap;
+            }
+            thead {
+                top: 142px;
+                z-index: 0;
+            }
+            tbody tr.hovered {
+                bottom: 44.9px;
+                top: 191.5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <table>
+            <thead>
+                <h3>List of staff members</h3><!--hr-->
+                <!-- <div class="action__menu"><i>&ctdot;</i></div> -->
+                <button class="action__menu"><i>&ctdot;</i></button>
+                <div class="action__div">
+                    <span class="tlbar" data-content="Add new teacher"><g>&plus;</g></span>
+                    <span class="tlbar" data-content="Edit #333"><g>&minus;</g></span>
+                    <span class="tlbar" data-content="Delete"><g>&times;</g></span>
+                </div>
+                <tr>
+                    <th>#</th>
+                    <th colspan="2">Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td colspan="2">Keanu Reeves
+                        <ul>
+                            <li>14de8a8</li>
+                            <li>KDBpwd</li>
+                            <li>JSS 1, JSS 2, JSS 3</li>
+                            <li>JSS 3 Topaz</li>
+                            <li>Mathematics, English Language, French Language, Chemistry</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td colspan="2">Gary Payton II</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Kevin De Bruyne
+                        <ul>
+                            <li>14de8a8</li>
+                            <li>KDBpwd</li>
+                            <li>JSS 1, JSS 2, JSS 3</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Jonathan Kellerman</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Kevin De Bruyne
+                        <ul>
+                            <li>14de8a8</li>
+                            <li>KDBpwd</li>
+                            <li>JSS 1, JSS 2, JSS 3</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Kevin De Bruyne
+                        <ul>
+                            <li>14de8a8</li>
+                            <li>KDBpwd</li>
+                            <li>JSS 1, JSS 2, JSS 3</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Jonathan Kellerman</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Jonathan Kellerman</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Jonathan Kellerman</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Jonathan Kellerman</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Jonathan Kellerman</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Jonathan Kellerman</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Jonathan Kellerman</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Jonathan Kellerman</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Jonathan Kellerman</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Jonathan Kellerman</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Jonathan Kellerman</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>&LeftAngleBracket;</td>
+                    <td>Page 4 of 10</td>
+                    <td>&RightAngleBracket;</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <dialog class="dlog__fm">
+        <form name="reg__fm">
+            <div class="fm__grp hdr">
+                <caption>Staff registration form</caption>
+                <span class="times"><g>&times;</g></span>
+            </div>
+            <div class="fm__grp">
+                <input type="text" name="fname" id="fname" placeholder="Enter Full Name" required/>
+                <select name="role" id="role" required>
+                    <option value="">Pick Role</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="fm_teacher">Form teacher</option>
+                    <option value="admin">Admin</option>
+                    <option value="spr_admin">Super Admin</option>
+                </select>
+                <input type="hidden" name="code"/>
+                <span class="minus" onclick="min(this)"><g>&minus;</g></span>
+            </div>
+            <div class="fm__grp ftr">
+                <span class="plus" onclick=""><g>&plus;</g></span>
+                <input type="submit" value="Submit">
+                <input type="reset" value="Clear">
+            </div>
+        </form>
+    </dialog>
+    <dialog class="dlog__fm">
+        <form name="reg__fm">
+            <caption>Teacher's registration form</caption>
+            <div class="fm__grp">
+                <label for="fname">Full name</label>
+                <input type="text" name="fname" id="fname" required/>
+                <select name="role" id="role">
+                    <option value="teacher"></option>
+                    <option value="fm_teacher"></option>
+                    <option value="admin"></option>
+                    <option value="spr_admin"></option>
+                </select>
+                <input type="hidden" name="code"/>
+            </div>
+            <div class="fm__grp">
+                <input type="submit" value="Submit">
+                <input type="submit" value="Cancel" method="formmethod">
+            </div>
+        </form>
+    </dialog>
+    <dialog class="dlog__fm">
+        <form name="reg__fm">
+            <caption>Teacher's registration form</caption>
+            <div class="fm__grp">
+                <label for="fname">Full name</label>
+                <input type="text" name="fname" id="fname" required/>
+                <select name="role" id="role">
+                    <option value="teacher"></option>
+                    <option value="fm_teacher"></option>
+                    <option value="admin"></option>
+                    <option value="spr_admin"></option>
+                </select>
+                <input type="hidden" name="code"/>
+            </div>
+            <div class="fm__grp">
+                <input type="submit" value="Submit">
+                <input type="submit" value="Cancel" method="formmethod">
+            </div>
+        </form>
+    </dialog>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const tableRows = document.querySelectorAll("tbody tr");
+            tableRows.forEach(tr => {
+                tr.addEventListener("click", () => showSubmenu(tr));
+            });
+            function showSubmenu(tr) {
+                for (i = 0; i < tableRows.length; i++) {
+                    if (tableRows[i].classList.contains('hovered')) {
+                        tableRows[i].classList.remove('hovered');
+                        tableRows[i].querySelector('td:last-of-type').classList.remove('hovered');
+                        return;
+                    }
+                }
+                tr.classList.toggle('hovered');
+                tr.querySelector('td:last-of-type').classList.toggle('hovered');
+            }
+        });
+                
+        const ctdot = document.querySelector("button.action__menu");
+        const menu = document.querySelector("div.action__div");
+        ctdot.onclick = function () {
+            menu.style.display = 'block';
+            // ctdot.classList.toggle('show');
+        }
+        document.body.querySelector('div.container').addEventListener('click', () => {
+            setTimeout(() => {
+                if (menu.style.display === 'block') menu.style.display = 'none';
+            }, 2000);
+        })
+
+        const fmDialogs = document.querySelectorAll('dialog.dlog__fm');
+        const spnAction = document.querySelectorAll('span.tlbar');
+        spnAction.forEach((span, key) => {
+            // console.log(span.dataset.content);
+            span.addEventListener('click', () => fmDialogs[key].showModal());
+        });
+
+        const times = document.querySelectorAll('span.times');
+        times.forEach(tm => {
+            tm.addEventListener('click', () => tm.closest('dialog').close());
+        });
+        
+        const plus = document.querySelectorAll('span.plus');
+        // const range = document.createRange();
+        // const start = range.setStart(fmDialogs[0].querySelectorAll('div.fm__grp')[1], 0);
+        // const end = range.setEnd(fmDialogs[0].querySelectorAll('div.fm__grp')[1], 0);
+        plus.forEach((pl, id) => {
+            pl.addEventListener('click', () => {
+                const range = fmDialogs[id].querySelectorAll('div.fm__grp');
+                if (range.length < 12) {
+                    fmDialogs[id].querySelector('div.ftr').insertAdjacentHTML('beforebegin', range[1].outerHTML);
+                } else {
+                    console.log("Limit reached!")
+                }
+            });
+        });
+
+        function min(me) {
+            console.log(me.closest('div.fm__grp').length)
+            const hdr = me.closest('div.fm__grp').previousElementSibling;
+            const ftr = me.closest('div.fm__grp').nextElementSibling;
+            if (!(hdr.classList.contains('hdr') && ftr.classList.contains('ftr'))) {
+                me.closest('div.fm__grp').remove();
+            }
+        }
+    </script>
+</body>
+</html>

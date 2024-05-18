@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 3</title>
+    <!-- <link rel="stylesheet" href="../main.css"> -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            font: 16px system-ui, sans-serif;
+            color: #555;
+            /* height: 100vh; */
+        }
+        a {
+            text-decoration: none;
+        }
+        i {
+            font-style: normal;
+        }
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-button {
+            height: 5px;
+            width: 5px;
+            background-color: #555;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #555;
+        }
+        ul {
+            margin-inline-start: 2em;
+            padding: 10px 0;
+        }
+        header {
+            background-color: #fff;
+            position: sticky;
+            top: 0;
+        }
+        header > ul {
+            list-style-type: none;
+            margin-inline-start: 20px;
+        }
+        header > ul > li {
+            padding: 5px 10px;
+            color: #777;
+            display: inline-block;
+        }
+        header > ul > li > a {
+            color: #777;
+        }
+        header > ul > li > a:hover {
+            color: #222;
+        }
+        i.gt {
+            height: 8px;
+            width: 8px;
+            display: inline-flex;
+            border: 2px solid;
+            border-color: #999 #999 transparent transparent;
+            transform: rotate(45deg);
+        }
+        main {
+            padding: 25px;
+        }
+        main > * {
+            margin: 0 auto 20px;
+        }
+        main > div {
+            /* display: flex;
+            flex-direction: column; */
+            text-align: center;
+        }
+        main > div > svg {
+            transform: rotate(30deg);
+            height: 80px;
+            width: 80px;
+        }
+        main > div > h1 {
+            font-size: 10em;
+            color: #555;
+            /* text-shadow: 3px 3px #eee; */
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+        main > div > p {
+            font-size: 2em;
+        }
+        footer {
+            padding: 20px;
+            color: #555;
+            text-align: center;
+            background-color: #f6f6f6;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        @media screen and (max-width: 667px) {
+            main > div > svg {
+            height: 50px;
+            width: 50px;
+        }
+            main > div > h1 {
+                font-size: 2.5em;
+            }
+            main > div > p {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <ul>
+            <li>Home</li>
+        </ul>
+    </header>
+    <main>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" viewBox="0 0 512 512" xml:space="preserve">
+                <g>
+                    <g>
+                        <path style="fill:#6581C9;" d="M10.816,368.821l24.497-55.111l24.7,55.578c6.903,15.537-4.467,33.033-21.469,33.033h-5.959    C15.345,402.322,3.816,384.578,10.816,368.821"/>
+                        <path style="fill:#6581C9;" d="M512,224.766L256,349.024L0,224.766l256-140.57L512,224.766z"/>
+                    </g>
+                    <g>
+                        <path style="fill:#445793;" d="M35.31,339.529c-4.882,0-8.828-3.946-8.828-8.828v-88.276c0-4.467,3.337-8.236,7.777-8.766    l220.69-26.483c4.89-0.556,9.234,2.887,9.816,7.715c0.583,4.846-2.869,9.234-7.715,9.816L44.138,250.255v80.446    C44.138,335.583,40.192,339.529,35.31,339.529"/>
+                        <path style="fill:#445793;" d="M256,349.02L97.103,271.893v75.167c0,19.306,12.262,36.952,29.528,45.586l17.496,8.748    c70.426,35.213,153.318,35.213,223.744,0l17.496-8.748c17.267-8.633,29.528-26.28,29.528-45.586v-75.167L256,349.02z"/>
+                        <path style="fill:orange;" d="M291.31,216.606c0,19.5-15.81,35.31-35.31,35.31s-35.31-15.81-35.31-35.31s15.81-35.31,35.31-35.31    S291.31,197.106,291.31,216.606"/>
+                    </g>
+                </g>
+            </svg>
+            <h1>Flutterspace</h1>
+            <p>An online, lightweight database for managing school reports.</p>
+        </div>
+    </main>
+    <footer>
+        Flutterspace &copy; 2024
+    </footer>
+    <script>
+        // const iframeParent = parent.window;
+    </script>
+</body>
+</html>

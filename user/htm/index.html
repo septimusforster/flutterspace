@@ -1,0 +1,126 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Play Grid</title>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/> -->
+    <link rel="stylesheet" href="index.css"/>
+</head>
+<body>
+    <header>header</header>
+    <aside>
+        <a class="menu__wrapper">
+            <img class="aside__icon" src="/9035117_person_icon.png" alt="alt1">
+            <span>Dashboard</span>
+        </a>
+        <a class="menu__wrapper">
+            <img class="aside__icon" src="/9035117_person_icon.png" alt="alt1">
+            <span>Staff</span>
+        </a>
+        <a class="menu__wrapper">
+            <img class="aside__icon" src="/9035117_person_icon.png" alt="alt1">
+            <span>Student</span>
+        </a>
+        <a class="menu__wrapper">
+            <img class="aside__icon" src="/9035117_person_icon.png" alt="alt1">
+            <span>Student</span>
+        </a>
+        <a class="menu__wrapper">
+            <img class="aside__icon" src="/9035117_person_icon.png" alt="alt1">
+            <span>Student</span>
+        </a>
+    </aside>
+    <main>
+        <div id="utc"></div>
+        <div id=""></div>
+    </main>
+    <footer>footer</footer>
+
+    <script>
+        const utc = document.getElementById("utc");
+        document.addEventListener("DOMContentLoaded", function () {
+            utc.classList.add("animate");
+            const options = {
+                dateStyle: "full"
+            }
+            const locales = Intl.DateTimeFormat.supportedLocalesOf(["fr","id","ja-JP-u-ca-japanese","gb","us"]);
+            let dateFormat = new Intl.DateTimeFormat(locales, options);
+            // console.log(dateFormat.resolvedOptions().timeZone)
+            const date = dateFormat.format(Date.now());
+            utc.textContent = date;
+        })
+        const main = document.querySelector("main");
+
+        const targetObject = {
+            status: {
+                length: 5,
+                0: "Super Admin",
+                1: "Admin",
+                2: "Guest Person",
+                3: "Form Teacher",
+                4: "Teacher"
+            }
+        }
+
+        function determineUser(usrIdx, usrs, user) {
+            console.log("I am User Number", usrIdx, "out of", usrs, ", called", user + ".")
+        }
+        const roleIndex = 1;
+        const handler1 = {
+            get (targetObject, prop, receiver) {
+                for (let i = 0; i < targetObject[prop].length; i++) {
+                    if (targetObject[prop][i] === targetObject[prop][roleIndex]) {
+                        determineUser(roleIndex + 1, targetObject[prop].length, targetObject[prop][i]);
+                        return;
+                    }
+                }
+                // return Reflect.get(...arguments);
+            }
+        }
+        const handler2 = {
+            get (targetObject, prop, receiver) {
+                return targetObject[prop].length;
+            }
+        };
+
+        const proxy = new Proxy(targetObject, handler1);
+        console.log(proxy.status)
+
+        // const divs = document.querySelectorAll("main > div");
+        // window.addEventListener("scroll", function () {
+        //     for (let i = 0; i < divs.length; i++) {
+        //         if (divs[i].getBoundingClientRect().top < window.innerHeight && divs[i].getBoundingClientRect().bottom >= 0) {
+        //             divs[i].classList.add("visible");
+        //             // return;
+        //         } else {
+        //             divs[i].classList.remove("visible");
+        //         }
+        //     }
+        // })
+
+
+        const aside = document.querySelector("aside");
+        const anchors = aside.querySelectorAll(".menu__wrapper");
+        aside.addEventListener("scroll", menuBarDisp);
+
+        function menuBarDisp() {
+            // console.log(e.target.scrollWidth);
+            for (let i = 0; i < anchors.length; i++) {
+                if (anchors[i].getBoundingClientRect().left < aside.scrollWidth && anchors[i].getBoundingClientRect().right >= 0) {
+                    anchors[i].classList.add("visible");
+                } else {
+                    anchors[i].classList.remove("visible");
+                }
+            }
+        }
+        menuBarDisp();
+
+        anchors.forEach(anc => {
+            anc.onclick = function () {
+                for (let i = 0; i < anchors.length; i++) anchors[i].classList.remove("active");
+                anc.classList.add("active");
+            }
+        })
+    </script>
+</body>
+</html>

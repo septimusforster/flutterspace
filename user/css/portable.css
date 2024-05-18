@@ -1,0 +1,18 @@
+div.left__right__arrow {
+    display: flex;
+}
+nav {
+    min-width: 0;
+    width: 33%;
+    overflow: hidden;
+    transition: width 500ms ease-in-out;
+}
+nav.toggle {
+    /* opacity: 0; */
+    /* min-width: 0%; */
+    width: 0;
+    pointer-events: none;
+}
+section {
+    width: 67%;
+}
