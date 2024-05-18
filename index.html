@@ -143,6 +143,9 @@
             min-width: 0;
             aspect-ratio: 0;
         }
+        dialog#dg_chk > p {
+            margin: 20px 0 40px;
+        }
         form#fm_reg > h3 {
             font-size: 1.2rem;
             display: flex;
@@ -330,7 +333,7 @@
     </main>
     <footer></footer>
     <dialog id="dg_reg">
-        <form name="register" id="fm_reg">
+        <form name="register" id="fm_reg" autocomplete="off">
             <h3><span>Register Your School</span><span class="times close"><i>&times;</i></span></h3>
             <div>Field labels marked with <sup class="star"><i>&Star;</i></sup> are required.</div>
             <label for="sn"><sup class="star"><i>&Star;</i></sup>School Name</label>
